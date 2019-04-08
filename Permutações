@@ -1,0 +1,44 @@
+importação itertools como ele
+importar timeit
+
+def  CountingSort ( array ):
+    maxValue =  max (array) +  1
+    count = [ 0 ] * maxValue
+    
+    para i em array:
+        contar [i] + =  1
+    i =  0
+    para j no  intervalo (maxValue):
+        para k no  intervalo (count [j]):
+            array [i] = j
+            i + =  1
+    matriz de retorno
+
+def  RadixSort ( array ):
+    m =  max (array)
+    
+    eu =  1
+    enquanto (m / i >  0 ):
+        CountingSort (array)
+        
+        i * = 10
+
+lista =  list (it.permutations ([ 1 , 2 , 3 , 4 , 5 , 6 ], 6 ))
+listaAux = []
+listaPermut = []
+
+para eu na lista:
+    listaAux.append ( lista (i))
+    listaPermut.append ( lista (i))
+
+tempos = []
+
+
+para i em listaPermut:
+    tempos.append (timeit.timeit ( ' bucketSort ( {} ) ' .format (i), setup = " de __main__ import bucketSort " , número = 50 ))
+
+maxIdx = tempos.index ( max (tempos))
+minIdx = tempos.index ( min (tempos))
+
+print ( ' Pior caso: ' , listaAux [maxIdx])
+print ( ' Melhor caso: ' , listaAux [minIdx])
