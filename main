@@ -1,0 +1,68 @@
+importação aleatória
+importar timeit
+import matplotlib as mpl
+import matplotlib.pyplot como plt
+
+def  desenhaGrafico ( x , y , graphLabel , nomeArquivo , XL  =  " Quantidade de Números " , il  =  " Tempo " ):
+    fig = plt.figure ( figsize = ( 10 , 8 ))
+    ax = fig.add_subplot ( 111 )
+    para eu na  faixa ( 3 ):
+        ax.plot (x, y [i], rótulo  = graphLabel [i])
+    ax.legend ( bbox_to_anchor = ( 1 , 1 ), bbox_transform = plt.gcf (). transFigura)
+    plt.ylabel (yl)
+    plt.xlabel (xl)
+    fig.savefig (fileName)
+
+def  geraListaInvertida ( tam ):
+    lista = []
+    enquanto tam >  0 :
+        lista.append (tam)
+        tam - = 1
+    return lista
+
+def  geraListaOrdenada ( tam ):
+    lista = []
+    para eu na  faixa (tam):
+        lista.append (i)
+    return lista
+
+def  CountingSort ( array ):
+    maxValue =  max (array) +  1
+    count = [ 0 ] * maxValue
+    
+    para i em array:
+        contar [i] + =  1
+    i =  0
+    para j no  intervalo (maxValue):
+        para k no  intervalo (count [j]):
+            array [i] = j
+            i + =  1
+    matriz de retorno
+
+def  RadixSort ( array ):
+    m =  max (array)
+    
+    eu =  1
+    enquanto (m / i >  0 ):
+        CountingSort (array)
+        
+        i * = 10
+
+
+x = [ 10000 , 20000 , 30000 , 40000 , 50000 ]
+yMelhorCaso = []
+yMedioCaso = []
+yPiorCaso = []
+
+para i em x:
+    yMelhorCaso.append (timeit.timeit ( " RadixSort ( {} ) " .format (geraListaOrdenada (i)), setup = " from __main__ import RadixSort " , número = 1 ))
+    
+    lista = geraListaOrdenada (i)
+    random.shuffle (geraListaOrdenada (i))
+    yMedioCaso.append (timeit.timeit ( " RadixSort ( {} ) " .format (lista), setup = " from __main__ import RadixSort " , número = 1 ))
+
+    yPiorCaso.append (timeit.timeit ( " RadixSort ( {} ) " .format (geraListaInvertida (i)), setup = " from __main__ import RadixSort " , número = 1 ))
+
+cases = [yMelhorCaso, yMedioCaso, yPiorCaso]
+casosLabel = [ ' Melhor caso ' , ' Medio caso ' , ' Pior caso ' ]
+desenhaGrafico (x, cases, casesLabel, ' RadixSortCasos.png ' )
